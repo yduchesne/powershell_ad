@@ -9,8 +9,8 @@ function AuthConnect($username, $nonSecurePass) {
     Connect-AzureAD -Credential AuthCreds($username, $nonSecurePass)
 }
 
-// ============================================================================
-// Users
+# ============================================================================
+# Users
 
 function UsersAll() {
     Get-AzureADUser -All $true
@@ -43,8 +43,8 @@ function UsersFromAD() {
     Get-AzureADUser -All $true | ?{$_.OnPremisesSecurityIdentifier -eq $null}
 }
 
-// ============================================================================
-// Groups
+# ============================================================================
+# Groups
 
 function GroupsAll() {
     Get-AzureADGroup -All $true
@@ -87,8 +87,8 @@ function GroupsWithMember($userId) {
 }
 
 
-// ============================================================================
-// Roles
+# ============================================================================
+# Roles
 
 function RoleTemplatesAll() {
     Get-AzureADDirectoryroleTemplate
@@ -102,8 +102,8 @@ function RoleMembers($roleName) {
     Get-AzureADDirectoryRole -Filter "DisplayName eq 'Global Administrator'" | Get-AzureADDirectoryRoleMember
 }
 
-// ============================================================================
-// Devices
+# ============================================================================
+# Devices
 
 function DevicesAll() {
     Get-AzureADDevice -All $true | fl *
@@ -133,8 +133,8 @@ function DevicesIntuneManaged($userId) {
     Get-AzureADDevice -All $true | ?{$_.IsCompliant -eq "True"}
 }
 
-// ============================================================================
-// Apps
+# ============================================================================
+# Apps
 
 function AppsAll() {
     Get-AzureADApplication -All $true
@@ -165,8 +165,8 @@ function AppsWithGroup($groupId) {
     Get-AzureADGroup -ObjectId $groupId | Get-AzureADGroupAppRoleAssignment | fl *
 }
 
-// ============================================================================
-// Service principals
+# ============================================================================
+# Service principals
 
 function SpAll() {
     Get-AzureADServicePrincipal -All $true
