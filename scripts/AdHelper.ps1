@@ -8,9 +8,9 @@ function AuthCreds($username, $nonSecurePass) {
 function AuthADConnect($username, $nonSecurePass) {
     Connect-AzureAD -Credential AuthCreds($username, $nonSecurePass)
 }
-function AccessToken($identityEnpoint, $identityHeader) {
+function AccessToken($identityEndpoint, $identityHeader) {
     $headers=@{"secret"=$identityHeader}
-    $response = Invoke-WebRequest -UseBasicParsing -Uri "$identityEnpoint?resource=https://storage.azure.com/&api-version=2017-09-01" -Headers $headers
+    $response = Invoke-WebRequest -UseBasicParsing -Uri "$($identityEndpoint)?resource=https://management.azure.com/&api-version=2017-09-01" -Headers $headers
     $response.RawContent
 }
 
