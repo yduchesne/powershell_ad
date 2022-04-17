@@ -5,13 +5,25 @@ function AuthCreds($username, $nonSecurePass) {
      return $creds
 }
 
-function AuthADConnect($username, $nonSecurePass) {
+function AuthAzureAD($username, $nonSecurePass) {
     Connect-AzureAD -Credential AuthCreds($username, $nonSecurePass)
 }
+
+function AuthAzureADWithCreds($creds) {
+    Connect-AzureAD -Credential $creds
+}
+
+function AuthAzAccount($username, $nonSecurePass) {
+    Connect-AzAccount -Credential AuthCreds($username, $nonSecurePass)
+}
+
+function AuthAzureAccountWithCredss($creds) {
+    Connect-AzAccount -Credential $creds
+}
+
 function AccessToken($identityEndpoint, $identityHeader) {
     $headers=@{"secret"=$identityHeader}
     $uri = "$($identityEndpoint)?resource=https://management.azure.com/&api-version=2017-09-01"
-    Write-Host $uri
     $response = Invoke-WebRequest -UseBasicParsing -Uri $uri -Headers $headers
     $response.RawContent
 }
@@ -118,7 +130,7 @@ function RolesAll() {
 }
 
 function RoleMembers($roleName) {
-    Get-AzureADDirectoryRole -Filter "DisplayName eq 'Global Administrator'" | Get-AzureADDirectoryRoleMember
+    Get-AzureADDirectoryRole -Filter "DisplayName eq $roleName" | Get-AzureADDirectoryRoleMember
 }
 
 # ============================================================================
