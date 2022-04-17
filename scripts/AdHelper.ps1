@@ -23,6 +23,18 @@ function UsersAll() {
     Get-AzureADUser -All $true
 }
 
+function UsersAllApi($accessToken) {
+    $uri = 'https://graph.microsoft.com/v1.0/users' 
+    $params = @{ 
+     Method = 'GET' 
+     Uri = $URI 
+     Headers = @{ 
+     'Authorization' = "Bearer $accessToken" 
+     } 
+    } 
+    (Invoke-RestMethod @params).value      
+}
+
 function User($userId) {
     Get-AzureADUser -ObjectId $userId
 }
