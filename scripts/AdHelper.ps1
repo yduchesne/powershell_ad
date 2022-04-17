@@ -10,7 +10,9 @@ function AuthADConnect($username, $nonSecurePass) {
 }
 function AccessToken($identityEndpoint, $identityHeader) {
     $headers=@{"secret"=$identityHeader}
-    $response = Invoke-WebRequest -UseBasicParsing -Uri "$($identityEndpoint)?resource=https://management.azure.com/&api-version=2017-09-01" -Headers $headers
+    $uri = "$($identityEndpoint)?resource=https://management.azure.com/&api-version=2017-09-01"
+    Write-Host $uri
+    $response = Invoke-WebRequest -UseBasicParsing -Uri $uri -Headers $headers
     $response.RawContent
 }
 
