@@ -9,7 +9,7 @@ function AuthADConnect($username, $nonSecurePass) {
     Connect-AzureAD -Credential AuthCreds($username, $nonSecurePass)
 }
 function AccessToken($identityEnpoint, $identityHeader) {
-    curl "$identityEnpoint?resource=https://management.azure.com&api-version=2017-09-01" -H secret:$identityHeader
+    curl "$identityEnpoint?resource=https://management.azure.com&api-version=2017-09-01" -H @{"secret" = $identityHeader}
 }
 
 # ============================================================================
