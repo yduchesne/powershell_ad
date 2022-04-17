@@ -130,7 +130,7 @@ function RolesAll() {
 }
 
 function RoleMembers($roleName) {
-    Get-AzureADDirectoryRole -Filter "DisplayName eq $roleName" | Get-AzureADDirectoryRoleMember
+    Get-AzureADDirectoryRole -Filter "DisplayName eq '$roleName'" | Get-AzureADDirectoryRoleMember
 }
 
 # ============================================================================
